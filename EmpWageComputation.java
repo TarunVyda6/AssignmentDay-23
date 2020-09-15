@@ -6,6 +6,7 @@ public class EmpWageComputation
 	public static final int wagePerHour=20;
 	public static final int isFullTime=1;
 	public static final int isPartTime=0;
+	public static final int numberOfWorkingDays=20;
 	public static void main(String[] args)
 	{
 		int workingHr=0;
@@ -27,8 +28,10 @@ public class EmpWageComputation
 		                        workingHr=0;
                 }
 		//calculates daily wage of employee
-		int DailyWage=wagePerHour*workingHr;
-		System.out.println("his daily wage is : "+DailyWage);
+		int dailyWage=wagePerHour*workingHr;
+		//calculates monthly wage of employee
+		int monthlyWage=dailyWage*numberOfWorkingDays;
+		System.out.println("his daily wage is : "+monthlyWage);
 	}
 
 
