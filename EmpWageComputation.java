@@ -2,6 +2,10 @@
 import java.util.*;
 public class EmpWageComputation
 {
+	//constant variables
+	public static final int wagePerHour=20;
+        public static final int fullDayHour=8;
+
 	public static void main(String[] args)
 	{
 
@@ -18,6 +22,9 @@ public class EmpWageComputation
 		{
 			System.out.println("employee is absent");
 		}
+		//calculates daily wage of full time employee
+		int fullTimeEmployeeDailyWage=wagePerHour*fullDayHour;
+		System.out.println("daily wage of full time employee is : "+fullTimeEmployeeDailyWage);
 	}
 
 
