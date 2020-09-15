@@ -4,31 +4,31 @@ public class EmpWageComputation
 {
 	//constant variables
 	public static final int wagePerHour=20;
-        public static final int fullDayHour=8;
-	public static final int partTimeHour=fullDayHour/2;
-
+	public static final int isFullTime=1;
+	public static final int isPartTime=0;
 	public static void main(String[] args)
 	{
+		int workingHr=0;
 
 		Random random=new Random();
-		//creates a random value of 0 or 1
-		int attendence=random.nextInt(2);
-		// if employee is present then attendence will be 1
-		// if employee is absent then attendence will be 0
-		if(attendence==1)
+		int employeeType=random.nextInt(3);
+		switch(employeeType)
 		{
-			System.out.println("employee is present");
-		}
-		else
-		{
-			System.out.println("employee is absent");
-		}
-		//calculates daily wage of full time employee
-		int fullTimeEmployeeDailyWage=wagePerHour*fullDayHour;
-		//calculates daily wage of part time employee
-		int partTimeEmployeeDailyWage=wagePerHour*partTimeHour;
-		System.out.println("daily wage of full time employee is : "+fullTimeEmployeeDailyWage);
-		System.out.println("daily wage of part time employee is : "+partTimeEmployeeDailyWage);
+                	case isFullTime:
+                        		System.out.println("employee is present and he is a full time employee");
+                        		workingHr=8;
+                        		break;
+                	case isPartTime:
+                        		System.out.println("employee is present and he is a part time employee");
+		                        workingHr=4;
+		                        break;
+		     	default:
+		                        System.out.println("employee is absent");
+		                        workingHr=0;
+                }
+		//calculates daily wage of employee
+		int DailyWage=wagePerHour*workingHr;
+		System.out.println("his daily wage is : "+DailyWage);
 	}
 
 
