@@ -7,31 +7,43 @@ public class EmpWageComputation
 	public static final int isFullTime=1;
 	public static final int isPartTime=0;
 	public static final int numberOfWorkingDays=20;
+	public static final int numberOfWorkingHours=100;
 	public static void main(String[] args)
 	{
 		int workingHr=0;
-
+		int totalSalary=0;
 		Random random=new Random();
 		int employeeType=random.nextInt(3);
-		switch(employeeType)
+		int totalWorkingHrs=0;
+		for(int day=1;day<=numberOfWorkingDays && totalWorkingHrs<=numberOfWorkingHours;day++)
 		{
-                	case isFullTime:
-                        		System.out.println("employee is present and he is a full time employee");
-                        		workingHr=8;
-                        		break;
-                	case isPartTime:
-                        		System.out.println("employee is present and he is a part time employee");
-		                        workingHr=4;
-		                        break;
-		     	default:
-		                        System.out.println("employee is absent");
-		                        workingHr=0;
-                }
-		//calculates daily wage of employee
-		int dailyWage=wagePerHour*workingHr;
-		//calculates monthly wage of employee
-		int monthlyWage=dailyWage*numberOfWorkingDays;
-		System.out.println("his daily wage is : "+monthlyWage);
+			switch(employeeType)
+			{
+                		case isFullTime:
+                        			workingHr=8;
+                        			break;
+	                	case isPartTime:
+			                        workingHr=4;
+			                        break;
+			     	default:
+			                        workingHr=0;
+	                }
+			if(totalWorkingHrs==96||totalWorkingHrs==94)
+			{
+				if (workingHr==8)
+				{
+					break;
+				}
+			}
+			else if(totalWorkingHrs==98)
+			{
+				break;
+			}
+			totalWorkingHrs+=workingHr;
+			int dailyWage=wagePerHour*workingHr;
+			totalSalary+=dailyWage;
+		}
+		System.out.println("current month wage of employee is : "+totalSalary);
 	}
 
 
@@ -39,3 +51,4 @@ public class EmpWageComputation
 
 }
 
+		
