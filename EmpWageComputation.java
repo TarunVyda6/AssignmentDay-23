@@ -5,6 +5,7 @@ public class EmpWageComputation
 	//constant variables
 	public static final int wagePerHour=20;
         public static final int fullDayHour=8;
+	public static final int partTimeHour=fullDayHour/2;
 
 	public static void main(String[] args)
 	{
@@ -24,7 +25,10 @@ public class EmpWageComputation
 		}
 		//calculates daily wage of full time employee
 		int fullTimeEmployeeDailyWage=wagePerHour*fullDayHour;
+		//calculates daily wage of part time employee
+		int partTimeEmployeeDailyWage=wagePerHour*partTimeHour;
 		System.out.println("daily wage of full time employee is : "+fullTimeEmployeeDailyWage);
+		System.out.println("daily wage of part time employee is : "+partTimeEmployeeDailyWage);
 	}
 
 
