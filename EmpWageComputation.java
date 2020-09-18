@@ -3,17 +3,17 @@ import java.util.*;
 public class EmpWageComputation
 {
 	//constant variables
-	public static final int wagePerHour=20;
 	public static final int isFullTime=1;
 	public static final int isPartTime=0;
-	public static final int numberOfWorkingDays=20;
-	public static final int numberOfWorkingHours=100;
 	public static void main(String[] args)
 	{
-		WageCalculation();
+		System.out.print("emp wage for abc company is ");
+		WageCalculation(20,20,100);
+		System.out.print("emp wage for xyz company is ");
+		WageCalculation(45,20,100);
 	}
 
-	public static void WageCalculation()
+	public static void WageCalculation(int wagePerHour,int numberOfWorkingDays,int numberOfWorkingHours)
 	{
 		int workingHr=0;
                 int totalSalary=0;
@@ -48,7 +48,7 @@ public class EmpWageComputation
                         int dailyWage=wagePerHour*workingHr;
                         totalSalary+=dailyWage;
                 }
-                System.out.println("current month wage of employee is : "+totalSalary);
+                System.out.println(totalSalary);
 
 	}
 
