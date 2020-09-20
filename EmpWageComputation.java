@@ -1,40 +1,49 @@
-/* welcome to Employee Wage Computation */
+	/* welcome to Employee Wage Computation */
 import java.util.*;
 
 public class EmpWageComputation
 {
 
-	 public static final int isFullTime=1;
+        public static final int isFullTime=1;
         public static final int isPartTime=0;
-        private final int wagePerHour;
-        private final int numberOfWorkingDays;
-        private final int numberOfWorkingHours;
-        private final String company;
-	private int totalSalary;
-	public EmpWageComputation(String company,int wagePerHour, int numberOfWorkingDays, int numberOfWorkingHours)
+        private int numOfCompany=0;
+        private CompanyEmpWage[] companyEmpWageArray;
+
+        public EmpWageComputation()
         {
-                this.company=company;
-                this.wagePerHour=wagePerHour;
-                this.numberOfWorkingDays=numberOfWorkingDays;
-                this.numberOfWorkingHours=numberOfWorkingHours;
+                companyEmpWageArray=new CompanyEmpWage[5];
+        }
+        private void addCompanyEmpWage(String company,int wagePerHour, int numberOfWorkingDays,int numberOfWorkingHours)
+        {
+                companyEmpWageArray[numOfCompany]=new CompanyEmpWage(company,wagePerHour, numberOfWorkingDays,numberOfWorkingHours);
+                numOfCompany++;
+        }
+        private void computeEmpWage()
+        {
+                for(int i=0;i<numOfCompany;i++)
+                {
+                        companyEmpWageArray[i].setTotalEmpWage(this.wageCalculation(companyEmpWageArray[i]));
+                        System.out.println(companyEmpWageArray[i]);
+                }
         }
 
-	public static void main(String[] args)
-	{
-		EmpWageComputation microSoft=new EmpWageComputation("MICROSOFT",20,20,100);
-		microSoft.wageCalculation();
-		System.out.println(microSoft);
-		EmpWageComputation google=new EmpWageComputation("GOOGLE",45,20,100);
-		google.wageCalculation();
-		System.out.println(google);
-	}
-	public void wageCalculation()
-	{
-		int workingHr=0;
+
+
+
+        public static void main(String[] args)
+        {
+                EmpWageComputation allCompanies=new EmpWageComputation();
+                allCompanies.addCompanyEmpWage("MICROSOFT",20,20,100);
+                allCompanies.addCompanyEmpWage("GOOGLE",40,40,100);
+                allCompanies.computeEmpWage();
+        }
+        public int wageCalculation(CompanyEmpWage companyEmpWage)
+        {
+                int workingHr=0;
                 Random random=new Random();
                 int employeeType=random.nextInt(3);
                 int totalWorkingHrs=0;
-                for(int day=1;day<=numberOfWorkingDays && totalWorkingHrs<=numberOfWorkingHours;day++)
+                for(int day=1;day<=companyEmpWage.numberOfWorkingDays && totalWorkingHrs<=companyEmpWage.numberOfWorkingHours;day++)
                 {
                         switch(employeeType)
                         {
@@ -59,16 +68,35 @@ public class EmpWageComputation
                                 break;
                         }
                         totalWorkingHrs+=workingHr;
-                        int dailyWage=wagePerHour*workingHr;
-                       this.totalSalary+=dailyWage;
                 }
-	}
-	public String toString()
-	{
-		return "total emp wage for "+company+" is:"+totalSalary;
-	}
-
+                return totalWorkingHrs * companyEmpWage.wagePerHour;
+        }
 
 }
 
+class CompanyEmpWage
+{
 
+        public final int wagePerHour;
+        public final int numberOfWorkingDays;
+        public final int numberOfWorkingHours;
+        public final String company;
+        public int totalEmpWage;
+
+         public CompanyEmpWage(String company,int wagePerHour, int numberOfWorkingDays,int numberOfWorkingHours)
+        {
+                this.company=company;
+                this.wagePerHour=wagePerHour;
+                this.numberOfWorkingDays=numberOfWorkingDays;
+                this.numberOfWorkingHours=numberOfWorkingHours;
+        }
+        public void setTotalEmpWage(int totalEmpWage)
+        {
+                this.totalEmpWage=totalEmpWage;
+        }
+        @Override
+         public String toString()
+        {
+                return "total emp wage for "+company+" is:"+totalEmpWage;
+        }
+}
