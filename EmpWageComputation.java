@@ -1,22 +1,36 @@
 /* welcome to Employee Wage Computation */
 import java.util.*;
+
 public class EmpWageComputation
 {
-	//constant variables
-	public static final int isFullTime=1;
-	public static final int isPartTime=0;
+
+	 public static final int isFullTime=1;
+        public static final int isPartTime=0;
+        private final int wagePerHour;
+        private final int numberOfWorkingDays;
+        private final int numberOfWorkingHours;
+        private final String company;
+	private int totalSalary;
+	public EmpWageComputation(String company,int wagePerHour, int numberOfWorkingDays, int numberOfWorkingHours)
+        {
+                this.company=company;
+                this.wagePerHour=wagePerHour;
+                this.numberOfWorkingDays=numberOfWorkingDays;
+                this.numberOfWorkingHours=numberOfWorkingHours;
+        }
+
 	public static void main(String[] args)
 	{
-		System.out.print("emp wage for abc company is ");
-		WageCalculation(20,20,100);
-		System.out.print("emp wage for xyz company is ");
-		WageCalculation(45,20,100);
+		EmpWageComputation microSoft=new EmpWageComputation("MICROSOFT",20,20,100);
+		microSoft.wageCalculation();
+		System.out.println(microSoft);
+		EmpWageComputation google=new EmpWageComputation("GOOGLE",45,20,100);
+		google.wageCalculation();
+		System.out.println(google);
 	}
-
-	public static void WageCalculation(int wagePerHour,int numberOfWorkingDays,int numberOfWorkingHours)
+	public void wageCalculation()
 	{
 		int workingHr=0;
-                int totalSalary=0;
                 Random random=new Random();
                 int employeeType=random.nextInt(3);
                 int totalWorkingHrs=0;
@@ -46,12 +60,13 @@ public class EmpWageComputation
                         }
                         totalWorkingHrs+=workingHr;
                         int dailyWage=wagePerHour*workingHr;
-                        totalSalary+=dailyWage;
+                       this.totalSalary+=dailyWage;
                 }
-                System.out.println(totalSalary);
-
 	}
-
+	public String toString()
+	{
+		return "total emp wage for "+company+" is:"+totalSalary;
+	}
 
 
 }
