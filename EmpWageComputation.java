@@ -15,23 +15,24 @@ public class EmpWageComputation implements iComputeEmpWage
         public static final int isFullTime=1;
         public static final int isPartTime=0;
         private int numOfCompany=0;
-        private CompanyEmpWage[] companyEmpWageArray;
+        private LinkedList<CompanyEmpWage> companyEmpWageList;
 
         public EmpWageComputation()
         {
-                companyEmpWageArray=new CompanyEmpWage[5];
+                companyEmpWageList=new LinkedList<>();
         }
         public void addCompanyEmpWage(String company,int wagePerHour, int numberOfWorkingDays,int numberOfWorkingHours)
         {
-                companyEmpWageArray[numOfCompany]=new CompanyEmpWage(company,wagePerHour, numberOfWorkingDays,numberOfWorkingHours);
-                numOfCompany++;
+                CompanyEmpWage companyEmpWage=new CompanyEmpWage(company,wagePerHour, numberOfWorkingDays,numberOfWorkingHours);
+                companyEmpWageList.add(companyEmpWage);
         }
         public void computeEmpWage()
         {
-                for(int i=0;i<numOfCompany;i++)
+                for(int i=0;i<companyEmpWageList.size();i++)
                 {
-                        companyEmpWageArray[i].setTotalEmpWage(this.wageCalculation(companyEmpWageArray[i]));
-                        System.out.println(companyEmpWageArray[i]);
+                		CompanyEmpWage companyEmpWage=companyEmpWageList.get(i);
+                        companyEmpWage.setTotalEmpWage(this.wageCalculation(companyEmpWage));
+                        System.out.println(companyEmpWage);
                 }
         }
 
