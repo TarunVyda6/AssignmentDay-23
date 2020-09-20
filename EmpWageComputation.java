@@ -1,7 +1,15 @@
 	/* welcome to Employee Wage Computation */
 import java.util.*;
 
-public class EmpWageComputation
+interface iComputeEmpWage
+{
+	public void addCompanyEmpWage(String company,int wagePerHour, int numberOfWorkingDays,int numberOfWorkingHours);
+	public void computeEmpWage();
+}
+
+
+
+public class EmpWageComputation implements iComputeEmpWage
 {
 
         public static final int isFullTime=1;
@@ -13,12 +21,12 @@ public class EmpWageComputation
         {
                 companyEmpWageArray=new CompanyEmpWage[5];
         }
-        private void addCompanyEmpWage(String company,int wagePerHour, int numberOfWorkingDays,int numberOfWorkingHours)
+        public void addCompanyEmpWage(String company,int wagePerHour, int numberOfWorkingDays,int numberOfWorkingHours)
         {
                 companyEmpWageArray[numOfCompany]=new CompanyEmpWage(company,wagePerHour, numberOfWorkingDays,numberOfWorkingHours);
                 numOfCompany++;
         }
-        private void computeEmpWage()
+        public void computeEmpWage()
         {
                 for(int i=0;i<numOfCompany;i++)
                 {
@@ -32,7 +40,7 @@ public class EmpWageComputation
 
         public static void main(String[] args)
         {
-                EmpWageComputation allCompanies=new EmpWageComputation();
+                iComputeEmpWage allCompanies=new EmpWageComputation();
                 allCompanies.addCompanyEmpWage("MICROSOFT",20,20,100);
                 allCompanies.addCompanyEmpWage("GOOGLE",40,40,100);
                 allCompanies.computeEmpWage();
