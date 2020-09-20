@@ -5,6 +5,7 @@ interface iComputeEmpWage
 {
 	public void addCompanyEmpWage(String company,int wagePerHour, int numberOfWorkingDays,int numberOfWorkingHours);
 	public void computeEmpWage();
+	public int getTotalWage(String company);
 }
 
 
@@ -14,18 +15,22 @@ public class EmpWageComputation implements iComputeEmpWage
 
         public static final int isFullTime=1;
         public static final int isPartTime=0;
-        private int numOfCompany=0;
         private LinkedList<CompanyEmpWage> companyEmpWageList;
+        private Map<String, CompanyEmpWage>	companyToEmpWageMap;
         private int dailyWage;
         public EmpWageComputation()
         {
                 companyEmpWageList=new LinkedList<>();
+                companyToEmpWageMap=new HashMap<>();
         }
+        @Override
         public void addCompanyEmpWage(String company,int wagePerHour, int numberOfWorkingDays,int numberOfWorkingHours)
         {
                 CompanyEmpWage companyEmpWage=new CompanyEmpWage(company,wagePerHour, numberOfWorkingDays,numberOfWorkingHours);
                 companyEmpWageList.add(companyEmpWage);
+                companyToEmpWageMap.put(company, companyEmpWage);
         }
+        @Override
         public void computeEmpWage()
         {
                 for(int i=0;i<companyEmpWageList.size();i++)
@@ -37,7 +42,11 @@ public class EmpWageComputation implements iComputeEmpWage
                 }
         }
 
-
+        @Override
+		public int getTotalWage(String company)
+		{
+			return companyToEmpWageMap.get(company).totalEmpWage;
+		}
 
 
         public static void main(String[] args)
@@ -46,6 +55,7 @@ public class EmpWageComputation implements iComputeEmpWage
                 allCompanies.addCompanyEmpWage("MICROSOFT",20,20,100);
                 allCompanies.addCompanyEmpWage("GOOGLE",40,40,100);
                 allCompanies.computeEmpWage();
+                System.out.println("total emp wage for Google is "+allCompanies.getTotalWage("GOOGLE"));
         }
         public int wageCalculation(CompanyEmpWage companyEmpWage)
         {
