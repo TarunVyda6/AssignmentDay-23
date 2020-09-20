@@ -16,7 +16,7 @@ public class EmpWageComputation implements iComputeEmpWage
         public static final int isPartTime=0;
         private int numOfCompany=0;
         private LinkedList<CompanyEmpWage> companyEmpWageList;
-
+        private int dailyWage;
         public EmpWageComputation()
         {
                 companyEmpWageList=new LinkedList<>();
@@ -32,6 +32,7 @@ public class EmpWageComputation implements iComputeEmpWage
                 {
                 		CompanyEmpWage companyEmpWage=companyEmpWageList.get(i);
                         companyEmpWage.setTotalEmpWage(this.wageCalculation(companyEmpWage));
+                        companyEmpWage.setDailyEmpWage(this.dailyWage);
                         System.out.println(companyEmpWage);
                 }
         }
@@ -77,6 +78,7 @@ public class EmpWageComputation implements iComputeEmpWage
                                 break;
                         }
                         totalWorkingHrs+=workingHr;
+                        this.dailyWage=companyEmpWage.wagePerHour*workingHr;
                 }
                 return totalWorkingHrs * companyEmpWage.wagePerHour;
         }
@@ -91,7 +93,7 @@ class CompanyEmpWage
         public final int numberOfWorkingHours;
         public final String company;
         public int totalEmpWage;
-
+        public int dailyWage;
          public CompanyEmpWage(String company,int wagePerHour, int numberOfWorkingDays,int numberOfWorkingHours)
         {
                 this.company=company;
@@ -103,9 +105,14 @@ class CompanyEmpWage
         {
                 this.totalEmpWage=totalEmpWage;
         }
+        public void setDailyEmpWage(int dailyWage)
+        {
+        	this.dailyWage=dailyWage;
+        }
         @Override
          public String toString()
         {
-                return "total emp wage for "+company+" is:"+totalEmpWage;
+                return "total emp wage for "+company+" is:"+totalEmpWage+"\n"+"dailywage for "+company+" is: "+dailyWage;
         }
 }
+
